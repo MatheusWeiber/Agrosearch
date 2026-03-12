@@ -1,9 +1,8 @@
 import os
 
-# Caminho onde as imagens estão
 dataset_path = os.path.join("backend", "datasets", "raw")
 
-print(f"📊 RELATÓRIO DE DADOS: {dataset_path}\n")
+print(f"RELATÓRIO DE DADOS: {dataset_path}\n")
 print(f"{'CULTURA':<10} | {'CLASSE / DOENÇA':<25} | {'QTD IMAGENS'}")
 print("-" * 55)
 
@@ -11,9 +10,9 @@ total_geral = 0
 
 # Verifica se a pasta existe
 if not os.path.exists(dataset_path):
-    print("❌ Erro: Pasta de datasets não encontrada.")
+    print("Erro: Pasta de datasets não encontrada.")
 else:
-    # Varre as culturas (soybean, corn)
+    # Varre as culturas dentro do dataset
     for cultura in os.listdir(dataset_path):
         cultura_path = os.path.join(dataset_path, cultura)
         

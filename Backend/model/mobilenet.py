@@ -32,7 +32,7 @@ train_path = '../datasets/processed/train'
 val_path = '../datasets/processed/val'
 test_path = '../datasets/processed/test'
 
-print('📂 Carregando imagens...')
+print(' Carregando imagens...')
 
 # Treino (Usa o datagen bagunçado)
 train_generator = train_datagen.flow_from_directory(
