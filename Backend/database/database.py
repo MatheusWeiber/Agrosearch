@@ -1,14 +1,31 @@
 import os
-from dotenv import load_dotenv, find_dotenv
-from supabase import create_client
+from dotenv import load_dotenv
+from supabase import create_client, Client
 
-# Carrega as variáveis
-load_dotenv(find_dotenv())
+# 1. Carrega as variáveis do arquivo .env
+load_dotenv()
 
-url = os.environ.get("SUPABASE_URL")
-key = os.environ.get("SUPABASE_KEY")
+url: str = os.environ.get("SUPABASE_URL")
+key: str = os.environ.get("SUPABASE_KEY")
 
-if not url or not key:
-    print(" Erro: Variáveis não encontradas no .env")
-else:
-    client = create_client(url, key)
+# 2. Cria a conexão com o seu banco
+supabase: Client = create_client(url, key)
+
+def saveDiagnosticRecord(user_id: str, diagnostic: str, confidence: float):
+    
+    try:
+        dados_para_salvar = {
+            "user_id": user_id,
+            "diagnostic": diagnostic,
+            "confidence": confidence
+        }
+        
+        # Faz o INSERT na tabela prediction
+        resposta = supabase.table("prediction").insert(dados_para_salvar).execute()
+        
+        print(f" Salvo no banco com sucesso: {diagnostic}")
+        return True
+    
+    except Exception as e:
+        print(f" Erro ao salvar no Supabase: {e}")
+        return False

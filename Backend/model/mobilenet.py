@@ -14,15 +14,18 @@ print(' Iniciando Transfer Learning com MobileNetV2...')
 
 # --- 1. PREPARAR OS DADOS ---
 # DATAGEN DE TREINO (Com distorção/Augmentation)
-train_datagen = ImageDataGenerator(
+datagen = ImageDataGenerator(
     rescale=1./255,
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
-    shear_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True,
-    fill_mode='nearest'
+    rotation_range=30,           # Gira a imagem levemente
+    width_shift_range=0.2,       # Move para os lados
+    height_shift_range=0.2,      # Move para cima/baixo
+    shear_range=0.2,             # Deforma
+    zoom_range=0.3,              # Aproxima
+    horizontal_flip=True,        # Espelha horizontalmente
+    vertical_flip=True,          # Espelha verticalmente
+    brightness_range=[0.6, 1.4], # Varia o brilho simulando diferentes iluminações
+    channel_shift_range=30,      # Varia as cores simulando diferentes câmeras
+    fill_mode='nearest'          # Preenche espaços vazios após transformações
 )
 
 # DATAGEN DE VALIDAÇÃO/TESTE (Limpo, só normalizado)
